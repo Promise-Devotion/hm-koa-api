@@ -8,11 +8,41 @@ router.get('/test', async ctx => {
   ctx.status = 200
   console.log(ctx.query.name)
   ctx.body = {
-    msg: 'user works ...'
+    msg: 'user works ...',
+    data: {
+      list: [{
+          name: 'aaa',
+          id: '00001'
+        },
+        {
+          name: 'bbb',
+          id: '00002'
+        }
+      ]
+    }
   }
 })
 router.get('/userlist', async ctx => {
-
+  console.log(ctx.query.name)
+  const findResult = await User.find({
+    name: ctx.query.name
+  })
+  if (findResult.length > 0) {
+    console.log(findResult)
+    ctx.status = 200
+    ctx.body = {
+      code: 200,
+      msg: '邮箱已被占用',
+      data: findResult
+    }
+  } else {
+    ctx.status = 500
+    ctx.body = {
+      code: 500,
+      msg: '数据为空',
+      data: []
+    }
+  }
 
 })
 
