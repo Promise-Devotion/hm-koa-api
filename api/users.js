@@ -32,7 +32,7 @@ router.get('/userlist', async ctx => {
     ctx.status = 200
     ctx.body = {
       code: 200,
-      msg: '邮箱已被占用',
+      msg: '查询成功',
       data: findResult
     }
   } else {
